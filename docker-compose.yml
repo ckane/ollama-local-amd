@@ -1,0 +1,35 @@
+# docker compose yaml to create an ollama service and a open-webui service
+services:
+  ollama:
+    image: ollama/ollama:rocm
+    container_name: ollama
+    ports:
+      # Expose port 11434 so that plugins like ollama-vim and others can use the service
+      - "11434:11434"
+    networks:
+      - ollamanet
+    devices:
+      # kfd and dri device access needed for AMDGPU ROCm support to work
+      - /dev/kfd:/dev/kfd
+      - /dev/dri:/dev/dri
+    volumes:
+      - ~/.ollama:/root/.ollama
+      # access to amdgpu version needed for AMDGPU ROCm to do correct GPU detection
+      - /sys/module/amdgpu/version:/sys/module/amdgpu/version
+    restart: always
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    ports:
+      # Expose port 8080 to host port 3000 so that we can access the open-webui from localhost:3000
+      - "3000:8080"
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+    networks:
+      - ollamanet
+    restart: always
+    depends_on:
+      - ollama
+networks:
+  ollamanet:
+
