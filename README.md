@@ -20,3 +20,18 @@ GUI access via: `http://localhost:3000`
 
 ![Screenshot of Open WebUI with DeepSeek-R1 Chat](/img/screenshot.png)
 
+## Vim Integration
+
+I use the following Vim plugin: [vim-ollama](https://github.com/gergap/vim-ollama)
+
+The following is used to set it up with DeepSeek, but also the defaults are to use the llama3 stuff:
+```vim
+let g:ollama_chat_model = 'deepseek-r1:latest'
+let g:ollama_model = 'deepseek-coder-v2:latest'
+```
+
+
+Disable copilot if you have it installed and you don't want the two plugins conflicting:
+```vim
+let g:copilot_enabled = 0
+```
