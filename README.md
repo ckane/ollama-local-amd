@@ -20,6 +20,16 @@ GUI access via: `http://localhost:3000`
 
 ![Screenshot of Open WebUI with DeepSeek-R1 Chat](/img/screenshot.png)
 
+You will need to manually pull down models you wish to use via the WebUI, or via the CLI. On the CLI, this can
+be accomplished via:
+```sh
+docker compose exec ollama ollama pull {modelname}
+```
+
+Where `{modelname}` is the model name in the [Ollama model library](https://ollama.ai/library).
+
+# Configuration
+
 ## Vim Integration
 
 I use the following Vim plugin: [vim-ollama](https://github.com/gergap/vim-ollama)
