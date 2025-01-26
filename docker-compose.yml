@@ -14,8 +14,6 @@ services:
       - /dev/dri:/dev/dri
     volumes:
       - ~/.ollama:/root/.ollama
-      # access to amdgpu version needed for AMDGPU ROCm to do correct GPU detection
-      - /sys/module/amdgpu/version:/sys/module/amdgpu/version
     restart: always
   open-webui:
     image: ghcr.io/open-webui/open-webui:main
