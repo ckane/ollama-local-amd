@@ -5,7 +5,7 @@ services:
     container_name: ollama
     ports:
       # Expose port 11434 so that plugins like ollama-vim and others can use the service
-      - "11434:11434"
+      - "127.0.0.1:11434:11434"
     networks:
       - ollamanet
     devices:
@@ -20,7 +20,7 @@ services:
     container_name: open-webui
     ports:
       # Expose port 8080 to host port 3000 so that we can access the open-webui from localhost:3000
-      - "3000:8080"
+      - "127.0.0.1:3000:8080"
     environment:
       - OLLAMA_BASE_URL=http://ollama:11434
     networks:
