@@ -30,6 +30,18 @@ services:
     restart: always
     depends_on:
       - ollama
+  chroma:
+    image: chromadb/chroma:latest
+    container_name: chroma
+    environment:
+      - IS_PERSISTENT=TRUE
+    ports:
+      - "127.0.0.1:3001:8000"
+    networks:
+      - ollamanet
+    volumes:
+      - ./chroma:/chroma/chroma
+    restart: always
 networks:
   ollamanet:
 
